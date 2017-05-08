@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +16,8 @@ import android.widget.Spinner;
 
 import com.example.ferra.ebdapp.R;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
 public class SalvarDataActivity extends AppCompatActivity {
@@ -24,9 +27,9 @@ public class SalvarDataActivity extends AppCompatActivity {
     public static final int IMAGEM_INTERNA = 12;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_salvar_data);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_salvar_data);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,13 +38,8 @@ public class SalvarDataActivity extends AppCompatActivity {
         Long dateSelected = intent.getLongExtra("dataLongMiliseconds", 0);
         Date date = new Date(dateSelected);
 
-        sp_hora_inicial = (Spinner) findViewById (R.id.sp_hora_inicial);
-        sp_hora_final = (Spinner) findViewById (R.id.sp_hora_final);
-
-
-
-
-
+        sp_hora_inicial = (Spinner) findViewById(R.id.sp_hora_inicial);
+        sp_hora_final = (Spinner) findViewById(R.id.sp_hora_final);
 
 
 //        // fazendo alguma coisa com o dado capturado
@@ -53,31 +51,62 @@ public class SalvarDataActivity extends AppCompatActivity {
 
 //    public Spinner getsp_hora_inicial() {return sp_hora_inicial}
 
-    public void pegarImg(View view){
-        Intent intent = new Intent (Intent.ACTION_GET_CONTENT);
+    public void pegarImg(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult (intent, IMAGEM_INTERNA);
+        startActivityForResult(intent, IMAGEM_INTERNA);
 
     }
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+//        if (requestCode==IMAGEM_INTERNA){
+//            if(resultCode==RESULT_OK){
+//                Uri imagemSelecionada = intent.getData ();
+//
+//                String[] colunas = {MediaStore.Images.Media.DATA};
+//
+//                Cursor cursor = getContentResolver ().query (imagemSelecionada, colunas, null, null, null);
+//                cursor.moveToFirst ();
+//
+//                int indexColuna = cursor.getColumnIndex (colunas[0]);
+//                String pathImg = cursor.getString (indexColuna);
+//                cursor.close ();
+//
+//                Bitmap bitmap = BitmapFactory.decodeFile (pathImg);
+//                ImageView img_banner = (ImageView) findViewById (R.id.img_banner);
+//                img_banner.setImageBitmap (bitmap);
+//            }
+//
+//        }
+//
+//    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-        if (requestCode==IMAGEM_INTERNA){
-            if(resultCode==RESULT_OK){
-                Uri imagemSelecionada = intent.getData ();
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == IMAGEM_INTERNA) {
+            if (resultCode == RESULT_OK) {
+//
+//                Uri uriImagemSelecionada = intent.getData();
+//                ImageView img_banner = (ImageView) findViewById(R.id.img_banner);
+//                img_banner.setImageURI(uriImagemSelecionada);
 
-                String[] colunas = {MediaStore.Images.Media.DATA};
+                ((ImageView) findViewById(R.id.img_banner)).setImageURI(intent.getData());
 
-                Cursor cursor = getContentResolver ().query (imagemSelecionada, colunas, null, null, null);
-                cursor.moveToFirst ();
+//                try {
+//                    Uri imagemSelecionada = intent.getData();
+//
+//                    InputStream inputStream = getContentResolver().openInputStream(imagemSelecionada);
+//                    Drawable drawable  = Drawable.createFromStream(inputStream, imagemSelecionada.toString());
+//
+//                    if (drawable != null) {
+//                        ImageView img_banner = (ImageView) findViewById(R.id.img_banner);
+//                        img_banner.setImageDrawable(drawable);
+//                    }
+//                } catch (FileNotFoundException e) {
+////                    drawable = getResources().getDrawable(R.drawable.default_image);
+//                }
 
-                int indexColuna = cursor.getColumnIndex (colunas[0]);
-                String pathImg = cursor.getString (indexColuna);
-                cursor.close ();
-
-                Bitmap bitmap = BitmapFactory.decodeFile (pathImg);
-                ImageView img_banner = (ImageView) findViewById (R.id.img_banner);
-                img_banner.setImageBitmap (bitmap);
             }
 
         }
