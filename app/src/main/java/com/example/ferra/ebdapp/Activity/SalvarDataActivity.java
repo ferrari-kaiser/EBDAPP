@@ -1,13 +1,7 @@
 package com.example.ferra.ebdapp.Activity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,8 +10,6 @@ import android.widget.Spinner;
 
 import com.example.ferra.ebdapp.R;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Date;
 
 public class SalvarDataActivity extends AppCompatActivity {
@@ -93,19 +85,7 @@ public class SalvarDataActivity extends AppCompatActivity {
 
                 ((ImageView) findViewById(R.id.img_banner)).setImageURI(intent.getData());
 
-//                try {
-//                    Uri imagemSelecionada = intent.getData();
-//
-//                    InputStream inputStream = getContentResolver().openInputStream(imagemSelecionada);
-//                    Drawable drawable  = Drawable.createFromStream(inputStream, imagemSelecionada.toString());
-//
-//                    if (drawable != null) {
-//                        ImageView img_banner = (ImageView) findViewById(R.id.img_banner);
-//                        img_banner.setImageDrawable(drawable);
-//                    }
-//                } catch (FileNotFoundException e) {
-////                    drawable = getResources().getDrawable(R.drawable.default_image);
-//                }
+
 
             }
 

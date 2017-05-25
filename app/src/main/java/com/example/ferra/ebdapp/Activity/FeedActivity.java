@@ -1,11 +1,14 @@
 package com.example.ferra.ebdapp.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,6 +28,8 @@ public class FeedActivity extends AppCompatActivity
 
 
     private Button btnSair;
+    private AlertDialog alerta;
+
 
 
     @Override
@@ -57,18 +62,7 @@ public class FeedActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//            Intent  intent = new Intent(getApplicationContext(), LoginActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.putExtra("SAIR", true);
-//            startActivity(intent);
-//        }
-
-
+        alertaSair ();
 
     }
 
@@ -91,7 +85,7 @@ public class FeedActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            alertaSair ();
         }else if (id == R.id.nav_calendario) {
             Intent intent = new Intent(getApplicationContext(), CalendarioActivity.class);
             startActivity(intent);
@@ -132,10 +126,12 @@ public class FeedActivity extends AppCompatActivity
 
         } else {
             if (id == nav_sair) {
-                Intent  intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("SAIR", true);
-                startActivity(intent);
+//                Intent  intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.putExtra("SAIR", true);
+//                startActivity(intent);
+
+                alertaSair ();
 
             }
         }
@@ -156,6 +152,37 @@ public class FeedActivity extends AppCompatActivity
 
 
     }
+
+    private void alertaSair() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("EBD APP");
+        //define a mensagem
+        builder.setMessage("Tem certeza que deseja sair?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+//                getParent().finish();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    finishAffinity();
+
+                }
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+//                Toast.makeText(getmContext(), "não=" + arg1, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
+
 
 
 }
