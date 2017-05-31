@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:context="com.example.ferra.ebdapp.Activity.SalvarDataActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                tools:context="com.example.ferra.ebdapp.Activity.SalvarDataActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -25,53 +25,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/app_bar"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_below="@id/app_bar">
+        android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hora do Evento:"
             android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <Spinner
-            android:id="@+id/sp_hora_inicial"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:entries="@array/sp_hora_inicial"
-            android:drawSelectorOnTop="true"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Spinner
+                android:id="@+id/sp_hora_inicial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/sp_hora_inicial"/>
             <!--android:padding="20dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Até"
-            android:textStyle="bold"
-            android:textSize="30dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAllCaps="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Até"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
 
-        <Spinner
-            android:id="@+id/sp_hora_final"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:entries="@array/sp_hora_final"
-            android:drawSelectorOnTop="true"/>
+            <Spinner
+                android:id="@+id/sp_hora_final"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/sp_hora_final"/>
             <!--android:padding="20dp"-->
 
 
-    </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView1"
@@ -79,13 +79,13 @@
             android:layout_height="wrap_content"
             android:text="Descrição do evento:"
             android:textAllCaps="true"
-            android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
             android:textStyle="bold"/>
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_marginLeft="113dp"-->
-            <!--android:layout_marginTop="71dp" />-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginLeft="113dp"-->
+        <!--android:layout_marginTop="71dp" />-->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -93,10 +93,10 @@
             android:layout_marginTop="7dp">
 
 
-        <EditText
-            android:id="@+id/txt_salvar_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/txt_salvar_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -129,10 +129,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textStyle="bold"
+            android:background="@drawable/ic_button"
             android:text="Salvar"
             android:textColor="@color/colorWhite"
-            android:background="@drawable/ic_button"/>
+            android:textStyle="bold"/>
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="8dp"
+            android:src="@color/contentDividerLineGray" />
+
+        <ListView
+            android:id="@+id/list_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
