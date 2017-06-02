@@ -28,7 +28,7 @@
     <string name="title_activity_contato">ContatoActivity</string>
     <string name="title_activity_como_chegar">Map</string>
 
-  <string name="action_trocar_email">Trocar Email</string>
+    <string name="action_trocar_email">Trocar Email</string>
     <string name="action_solicitar_cartao_pre_pago">Solicitar Cartão Pré-Pago</string>
     <string name="action_trocar_senha">Trocar Senha</string>
 
@@ -100,6 +100,23 @@
         <item>23:00 </item>
 
     </string-array>
+
+
+    <string-array name="sp_departamentos">
+        <item>Ministério de Louvor </item>
+        <item>Tesouraria </item>
+        <item>Missões </item>
+        <item>Noite da Vitória </item>
+        <item>Mocidade </item>
+        <item>Adolescentes </item>
+        <item>Cantina </item>
+        <item>Obreiro </item>
+        <item>Conjunto Emanuel </item>
+        <item>Conjunto Betuel </item>
+
+    </string-array>
+
+
 
     <!--// Sexo-->
 

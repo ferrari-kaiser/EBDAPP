@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView btnCadastro;
-    private Button btnLogin;
+    private TextView btnComoChegar;
 
 
     @Override
@@ -96,9 +96,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-        btnLogin = (Button) findViewById(R.id.drawer_layout);
 
         btnCadastro = (TextView) findViewById(R.id.txtViewCriaLogin);
+        btnComoChegar = (TextView) findViewById (R.id.txtComoChegar);
+
 
         btnCadastro.setOnClickListener(new OnClickListener() {
             @Override
@@ -108,6 +109,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        btnComoChegar.setOnClickListener (new OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent(getApplicationContext(), ComoChegarActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

@@ -34,7 +34,7 @@ public class CriaBanco extends SQLiteOpenHelper {
                 + ID + "integer primary key autoincrement,"
                 + HORAINICIAL + "text,"
                 + HORAFINAL + "text,"
-                + DESCRICAO + "text"
+                + DESCRICAO + "text,"
                 + IMAGEM + "text"
                 +")";
         db.execSQL(sql);

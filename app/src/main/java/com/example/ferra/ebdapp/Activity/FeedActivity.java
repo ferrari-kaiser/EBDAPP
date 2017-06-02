@@ -121,7 +121,7 @@ public class FeedActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_como_chegar) {
-            Intent intent = new Intent(getApplicationContext(), ComoChegarActivity.class);
+            Intent intent = new Intent(getApplicationContext(), VoluntariadoActivity.class);
             startActivity(intent);
 
         } else {

@@ -49,7 +49,7 @@ public class CadastroActivity extends AppCompatActivity {
                 mController.isValidateActivity();
 
                 if(mController.isValidateActivity()){
-                    Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity (intent);
                 }else {
                     Toast.makeText(getApplicationContext(),"Deu Errado",Toast.LENGTH_LONG).show();

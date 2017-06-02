@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.ferra.ebdapp.Controller.BancoController;
 import com.example.ferra.ebdapp.R;
 
 import java.util.Date;
@@ -41,25 +38,25 @@ public class SalvarDataActivity extends AppCompatActivity {
 
         Button botao = (Button)findViewById(R.id.btn_banner);
 
-        botao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BancoController crud = new BancoController(getBaseContext(), null);
-                sp_hora_inicial = (Spinner)findViewById(R.id.sp_hora_inicial);
-                sp_hora_final = (Spinner) findViewById (R.id.sp_hora_final);
-                EditText descricao = (EditText)findViewById((R.id.txt_salvar_data));
-                ImageView imagem = (ImageView)findViewById(R.id.img_banner);
-                String horaInicial = sp_hora_inicial.toString ();
-                String horaFinal = sp_hora_final.toString ();
-                String descricaoData = descricao.getText().toString();
-                String imagemData = imagem.toString ();
-                String resultado;
-
-                resultado = crud.insereDado(horaInicial,horaFinal,descricaoData,imagemData);
-
-                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
-            }
-        });
+//        botao.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                BancoController crud = new BancoController(getBaseContext(), null);
+//                sp_hora_inicial = (Spinner)findViewById(R.id.sp_hora_inicial);
+//                sp_hora_final = (Spinner) findViewById (R.id.sp_hora_final);
+//                EditText descricao = (EditText)findViewById((R.id.txt_salvar_data));
+//                ImageView imagem = (ImageView)findViewById(R.id.img_banner);
+//                String horaInicial = sp_hora_inicial.toString ();
+//                String horaFinal = sp_hora_final.toString ();
+//                String descricaoData = descricao.getText().toString();
+//                String imagemData = imagem.toString ();
+//                String resultado;
+//
+//                resultado = crud.insereDado(horaInicial,horaFinal,descricaoData,imagemData);
+//
+//                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
 
