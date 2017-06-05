@@ -20,13 +20,13 @@ public class CadastroController extends BaseActivityController<CadastroActivity>
     public void initDataComponent(){
 
 
-        activity.getEddatanascimento().addTextChangedListener(new MaskEditTextChangedListener("##/##/####", activity.getEddatanascimento()));
-        activity.getEdtelefonecelular().addTextChangedListener(new MaskEditTextChangedListener("(##)#####-####", activity.getEdtelefonecelular()));
+//        activity.getEddatanascimento().addTextChangedListener(new MaskEditTextChangedListener("##/##/####", activity.getEddatanascimento()));
+        activity.getEdtelefone().addTextChangedListener(new MaskEditTextChangedListener("(##)#####-####", activity.getEdtelefone()));
 
 
-        Utils.hideSoftKeyboardOnMaxLength(activity, activity.getEddatanascimento(), 10);
-        Utils.hideSoftKeyboardOnMaxLength(activity, activity.getEddatanascimento(), 10);
-        Utils.hideSoftKeyboardOnMaxLength(activity,activity.getEdtelefonecelular(), 13);
+//        Utils.hideSoftKeyboardOnMaxLength(activity, activity.getEddatanascimento(), 10);
+//        Utils.hideSoftKeyboardOnMaxLength(activity, activity.getEddatanascimento(), 10);
+        Utils.hideSoftKeyboardOnMaxLength(activity,activity.getEdtelefone(), 13);
 
     }
 
@@ -47,19 +47,14 @@ public class CadastroController extends BaseActivityController<CadastroActivity>
         }
 
 
-        if(activity.getEddatanascimento().getText().toString().length() < 10){
-            activity.getEddatanascimento().setError(activity.getString(R.string.error_data_nascimento_invalida));
-            activity.getEddatanascimento().requestFocus();
-            dataDeAniverssárioError = true;
-        }
 
 
 
 
 
-        if(activity.getEdtelefonecelular().getText().toString().isEmpty()){
-            activity.getEdtelefonecelular().setError(activity.getString(R.string.error_invalid));
-            activity.getEdtelefonecelular().requestFocus();
+        if(activity.getEdtelefone().getText().toString().isEmpty()){
+            activity.getEdtelefone().setError(activity.getString(R.string.error_invalid));
+            activity.getEdtelefone().requestFocus();
             telefoneCelularError = true;
         }
 
