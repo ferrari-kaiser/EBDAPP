@@ -28,7 +28,7 @@ public class DB {
         valores.put("email", cadastro.getEmail());
         valores.put("telefone", cadastro.getTelefone());
         valores.put("senha", cadastro.getSenha());
-        valores.put("confirmasenha", cadastro.getConfirmasenha());
+//        valores.put("confirmasenha", cadastro.getConfirmasenha());
 
         db.insert("cadastro", null, valores);
     }
@@ -40,7 +40,7 @@ public class DB {
         valores.put("email", cadastro.getEmail());
         valores.put("telefone", cadastro.getTelefone());
         valores.put("senha", cadastro.getSenha());
-        valores.put("confirmasenha", cadastro.getConfirmasenha());
+//        valores.put("confirmasenha", cadastro.getConfirmasenha());
 
         db.update("cadastro", valores, "_id = ?", new String[]{""+cadastro.getId()});
     }

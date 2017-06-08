@@ -24,8 +24,7 @@ public class DBUsuario extends SQLiteOpenHelper {
                                             " nome text not null, " +
                                             "email text not null," +
                                             "telefone int not null," +
-                                            "senha text not null," +
-                                            "'confirmasenha text not null);");
+                                            "senha text not null);");
     }
 
     @Override
