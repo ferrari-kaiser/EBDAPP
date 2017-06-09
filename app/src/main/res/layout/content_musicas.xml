@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.ferra.ebdapp.Activity.MusicasActivity"
+    tools:context="com.speedway.mobile.eclesiastico.activity.MusicasActivity"
     tools:showIn="@layout/activity_musicas">
 
     <LinearLayout

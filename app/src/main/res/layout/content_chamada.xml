@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.ferra.ebdapp.Activity.AgendaActivity"
+    tools:context="com.speedway.mobile.eclesiastico.activity.AgendaActivity"
     tools:showIn="@layout/activity_chamada">
 
    <ScrollView
