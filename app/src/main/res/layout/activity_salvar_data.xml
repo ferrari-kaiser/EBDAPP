@@ -117,8 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/ic_button"
-                android:onClick="pegarImg"
-                android:text="Selecionar Imagem"
+                android:text="Imagem"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"/>
 

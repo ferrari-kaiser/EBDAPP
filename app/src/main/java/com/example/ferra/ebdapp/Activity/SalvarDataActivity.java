@@ -1,7 +1,10 @@
 package com.example.ferra.ebdapp.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +20,8 @@ public class SalvarDataActivity extends AppCompatActivity {
 
     public Spinner sp_hora_inicial;
     public Spinner sp_hora_final;
+    public Button btnBanner;
+    private AlertDialog alerta;
     public static final int IMAGEM_INTERNA = 12;
 
     @Override
@@ -36,40 +41,57 @@ public class SalvarDataActivity extends AppCompatActivity {
         sp_hora_inicial = (Spinner) findViewById(R.id.sp_hora_inicial);
         sp_hora_final = (Spinner) findViewById(R.id.sp_hora_final);
 
-        Button botao = (Button)findViewById(R.id.btn_banner);
+        btnBanner = (Button) findViewById (R.id.btn_banner);
 
-//        botao.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                BancoController crud = new BancoController(getBaseContext(), null);
-//                sp_hora_inicial = (Spinner)findViewById(R.id.sp_hora_inicial);
-//                sp_hora_final = (Spinner) findViewById (R.id.sp_hora_final);
-//                EditText descricao = (EditText)findViewById((R.id.txt_salvar_data));
-//                ImageView imagem = (ImageView)findViewById(R.id.img_banner);
-//                String horaInicial = sp_hora_inicial.toString ();
-//                String horaFinal = sp_hora_final.toString ();
-//                String descricaoData = descricao.getText().toString();
-//                String imagemData = imagem.toString ();
-//                String resultado;
-//
-//                resultado = crud.insereDado(horaInicial,horaFinal,descricaoData,imagemData);
-//
-//                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
-//            }
-//        });
+        btnBanner.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+
+                alertaImagem ();
+
+            }
+        });
+
     }
 
 
-//        // fazendo alguma coisa com o dado capturado
-//        TextView txt = (TextView) findViewById(R.id.txt_salvar_data);
-//        txt.setText(date.toString());
+
+    private void alertaImagem() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("EBD APP");
+        //define a mensagem
+        builder.setMessage("Deseja tirar foto ou selecionar imagem da galeria do aparelho?");
+        //define um botão como positivo
+        builder.setPositiveButton("Foto", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                tirarFoto ();
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Galeria", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+//
+                pegarImg ();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 
 
+    private void tirarFoto() {
+
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(intent, 0);
+    }
 
 
-//    public Spinner getsp_hora_inicial() {return sp_hora_inicial}
-
-    public void pegarImg(View view) {
+    public void pegarImg () {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGEM_INTERNA);
@@ -79,18 +101,60 @@ public class SalvarDataActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == IMAGEM_INTERNA) {
-            if (resultCode == RESULT_OK) {
+            if (requestCode == IMAGEM_INTERNA) {
+                if (resultCode == RESULT_OK) {
 
-                ((ImageView) findViewById(R.id.img_banner)).setImageURI(intent.getData());
+                    ((ImageView) findViewById (R.id.img_banner)).setImageURI (intent.getData ());
 
 
+                }
 
             }
 
+        if (intent != null){
+
+            Bundle bundle = intent.getExtras();
+            if (bundle!= null){
+
+
+
+                Bitmap img = (Bitmap) bundle.get("data");
+
+
+                ImageView iv = (ImageView) findViewById(R.id.img_banner);
+                iv.setImageBitmap(img);
+//
+
+
+            }
         }
 
-    }
+        }
+
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+////        super.onActivityResult(requestCode, resultCode, data);
+//        if (intent != null){
+//
+//            Bundle bundle = intent.getExtras();
+//            if (bundle!= null){
+//
+//
+//
+//                Bitmap img = (Bitmap) bundle.get("data");
+//
+//
+//                ImageView iv = (ImageView) findViewById(R.id.img_banner);
+//                iv.setImageBitmap(img);
+////
+//
+//
+//            }
+//        }
+//    }
+//
 
 
 }
