@@ -76,38 +76,11 @@ public class SalvarDataActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-//        if (requestCode==IMAGEM_INTERNA){
-//            if(resultCode==RESULT_OK){
-//                Uri imagemSelecionada = intent.getData ();
-//
-//                String[] colunas = {MediaStore.Images.Media.DATA};
-//
-//                Cursor cursor = getContentResolver ().query (imagemSelecionada, colunas, null, null, null);
-//                cursor.moveToFirst ();
-//
-//                int indexColuna = cursor.getColumnIndex (colunas[0]);
-//                String pathImg = cursor.getString (indexColuna);
-//                cursor.close ();
-//
-//                Bitmap bitmap = BitmapFactory.decodeFile (pathImg);
-//                ImageView img_banner = (ImageView) findViewById (R.id.img_banner);
-//                img_banner.setImageBitmap (bitmap);
-//            }
-//
-//        }
-//
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == IMAGEM_INTERNA) {
             if (resultCode == RESULT_OK) {
-//
-//                Uri uriImagemSelecionada = intent.getData();
-//                ImageView img_banner = (ImageView) findViewById(R.id.img_banner);
-//                img_banner.setImageURI(uriImagemSelecionada);
 
                 ((ImageView) findViewById(R.id.img_banner)).setImageURI(intent.getData());
 

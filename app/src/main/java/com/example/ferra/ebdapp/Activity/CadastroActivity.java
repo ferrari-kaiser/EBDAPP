@@ -59,24 +59,26 @@ public class CadastroActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             if(bundle != null){
 
-                cadastro.setId(bundle.getLong("id"));
-                cadastro.setNome(bundle.getString("nome"));
-                cadastro.setEmail(bundle.getString("email"));
-                cadastro.setTelefone(bundle.getInt ("telefone"));
-                cadastro.setSenha (bundle.getString("senha"));
-                cadastro.setConfirmasenha (bundle.getString("confirmasenha"));
 
-                ednome.setText(cadastro.getNome());
-                edemail.setText(cadastro.getEmail());
-                edtelefone.setText((int) cadastro.getTelefone());
-                edsenha.setText(cadastro.getSenha());
-                edconfirmasenha.setText(cadastro.getConfirmasenha());
+                    cadastro.setId (bundle.getLong ("id"));
+                    cadastro.setNome (bundle.getString ("nome"));
+                    cadastro.setEmail (bundle.getString ("email"));
+                    cadastro.setTelefone (bundle.getInt ("telefone"));
+                    cadastro.setSenha (bundle.getString ("senha"));
+//                    cadastro.setConfirmasenha (bundle.getString ("confirmasenha"));
 
 
+                    ednome.setText (cadastro.getNome ());
+                    edemail.setText (cadastro.getEmail ());
+                    edtelefone.setText ((int) cadastro.getTelefone ());
+                    edsenha.setText (cadastro.getSenha ());
+//                    edconfirmasenha.setText (cadastro.getConfirmasenha ());
 
-                edsenha.setVisibility(View.VISIBLE);
-                edconfirmasenha.setVisibility(View.VISIBLE);
-                btnCadastre.setVisibility(View.VISIBLE);
+
+                    edsenha.setVisibility (View.VISIBLE);
+                    edconfirmasenha.setVisibility (View.VISIBLE);
+                    btnCadastre.setVisibility (View.VISIBLE);
+
             }
         }
     }
@@ -86,7 +88,7 @@ public class CadastroActivity extends AppCompatActivity {
         cadastro.setEmail(edemail.getText().toString());
         cadastro.setTelefone (edtelefone.getInputType ());
         cadastro.setSenha (edsenha.getText().toString());
-        cadastro.setConfirmasenha (edconfirmasenha.getText().toString());
+//        cadastro.setConfirmasenha (edconfirmasenha.getText().toString());
 
 
 
@@ -97,25 +99,13 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
 
-//    public void salvarUsuario(View view){
-//        cadastro.setNome(ednome.getText().toString());
-//        cadastro.setEmail(edemail.getText().toString());
-//        cadastro.setTelefone (Long.parseLong (edtelefone.getText().toString()));
-//        cadastro.setSenha (edsenha.getText().toString());
-//        cadastro.setConfirmasenha (edconfirmasenha.getText().toString());
-//
-//
-//
-//        DB db = new DB(this);
-//        db.inserir(cadastro);
-//
-//        Toast.makeText(this, "Usuário inserido com sucesso!", Toast.LENGTH_SHORT).show();
-//    }
 
 
     public void editarUsuario(View view){
         cadastro.setNome(ednome.getText().toString());
         cadastro.setEmail(edemail.getText().toString());
+        cadastro.setTelefone (edtelefone.getInputType ());
+        cadastro.setSenha (edsenha.getText().toString());
 
         DB db = new DB(this);
         db.atualizar(cadastro);

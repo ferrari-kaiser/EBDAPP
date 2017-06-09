@@ -119,9 +119,9 @@ public class FeedActivity extends AppCompatActivity
         } else if (id == R.id.nav_perfil) {
 
 
-
             Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
             startActivity(intent);
+
 
         } else if (id == R.id.nav_como_chegar) {
             Intent intent = new Intent(getApplicationContext(), VoluntariadoActivity.class);
@@ -151,6 +151,7 @@ public class FeedActivity extends AppCompatActivity
 //            }
 //            super.onResume();
 //        }
+
 
 
 

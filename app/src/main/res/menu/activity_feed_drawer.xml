@@ -22,7 +22,7 @@
             <item
                 android:id="@+id/nav_perfil"
                 android:icon="@drawable/perfil"
-                android:title="Perfil" />
+                android:title="Perfil"/>
             <item
                 android:id="@+id/nav_como_chegar"
                 android:icon="@drawable/agenda"
