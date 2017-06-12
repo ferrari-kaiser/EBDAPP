@@ -117,6 +117,30 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:counterMaxLength="13">
+
+
+                <EditText
+                    android:id="@+id/ed_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Senha"
+                    android:textColorHint="@color/colorWhite"
+                    android:inputType="textPassword"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteY="0dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+
             <Button
                 android:id="@+id/btn_atualizar_dados"
                 android:layout_width="match_parent"

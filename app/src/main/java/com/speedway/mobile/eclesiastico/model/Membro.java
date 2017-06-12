@@ -1,9 +1,7 @@
 package com.speedway.mobile.eclesiastico.model;
 
-import java.util.Date;
-
 /**
- * @author yesus
+ * @author ferrari
  */
 public class Membro {
 
