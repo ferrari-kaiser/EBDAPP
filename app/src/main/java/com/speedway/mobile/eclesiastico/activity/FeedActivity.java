@@ -87,7 +87,7 @@ public class FeedActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             alertaSair ();
         }else if (id == R.id.nav_calendario) {
-            Intent intent = new Intent(getApplicationContext(), CalendarioActivity.class);
+            Intent intent = new Intent(getApplicationContext(), EscolhaCalendarioActivity.class);
             startActivity(intent);
 
 
@@ -106,7 +106,7 @@ public class FeedActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == nav_calendario) {
-            Intent intent = new Intent(getApplicationContext(), CalendarioActivity.class);
+            Intent intent = new Intent(getApplicationContext(), EscolhaCalendarioActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_agenda) {
             Intent intent = new Intent(getApplicationContext(), AgendaActivity.class);

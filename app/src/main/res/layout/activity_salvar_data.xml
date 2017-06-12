@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
-                tools:context="com.speedway.mobile.eclesiastico.activity.SalvarDataActivity">
+                tools:context="com.speedway.mobile.eclesiastico.activity.EventoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -32,6 +32,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Data do Evento:"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txt_data_evento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Hora do Evento:"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
@@ -50,7 +67,6 @@
                 android:layout_weight="1"
                 android:drawSelectorOnTop="true"
                 android:entries="@array/sp_hora_inicial"/>
-            <!--android:padding="20dp"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,7 +90,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/txtDescricaoEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Descrição do evento:"
@@ -94,7 +110,7 @@
 
 
             <EditText
-                android:id="@+id/txt_salvar_data"
+                android:id="@+id/txt_descricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -125,6 +141,7 @@
 
 
         <Button
+            android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -143,7 +160,7 @@
             android:src="@color/contentDividerLineGray" />
 
         <ListView
-            android:id="@+id/list_banner"
+            android:id="@+id/lista_eventos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

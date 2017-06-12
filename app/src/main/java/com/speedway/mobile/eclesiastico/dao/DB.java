@@ -28,9 +28,9 @@ public class DB {
         valores.put("email", cadastro.getEmail());
         valores.put("telefone", cadastro.getTelefone());
         valores.put("senha", cadastro.getSenha());
-//        valores.put("confirmasenha", cadastro.getConfirmasenha());
+//        valores.put("confirmasenha", cadastroMembro.getConfirmasenha());
 
-        db.insert("cadastro", null, valores);
+        db.insert("cadastroMembro", null, valores);
     }
 
 
@@ -40,14 +40,14 @@ public class DB {
         valores.put("email", cadastro.getEmail());
         valores.put("telefone", cadastro.getTelefone());
         valores.put("senha", cadastro.getSenha());
-//        valores.put("confirmasenha", cadastro.getConfirmasenha());
+//        valores.put("confirmasenha", cadastroMembro.getConfirmasenha());
 
-        db.update("cadastro", valores, "_id = ?", new String[]{""+cadastro.getId()});
+        db.update("cadastroMembro", valores, "_id = ?", new String[]{""+cadastro.getId()});
     }
 
 
     public void deletar(Cadastro cadastro){
-        db.delete("cadastro", "_id = "+cadastro.getId(), null);
+        db.delete("cadastroMembro", "_id = "+cadastro.getId(), null);
     }
 
 
@@ -55,7 +55,7 @@ public class DB {
         List<Cadastro> list = new ArrayList<Cadastro> ();
         String[] colunas = new String[]{"_id", "nome", "email"};
 
-        Cursor cursor = db.query ("cadastro", colunas, null, null, null, null, "nome ASC");
+        Cursor cursor = db.query ("cadastroMembro", colunas, null, null, null, null, "nome ASC");
 
         if(cursor.getCount() > 0){
             cursor.moveToFirst();
@@ -66,7 +66,7 @@ public class DB {
                 cadastro.setId(cursor.getLong(0));
                 cadastro.setNome(cursor.getString(1));
                 cadastro.setEmail(cursor.getString(2));
-//                cadastro.setTelefone (cursor.getInt (3));
+//                cadastroMembro.setTelefone (cursor.getInt (3));
                 list.add(cadastro);
 
             }while(cursor.moveToNext());

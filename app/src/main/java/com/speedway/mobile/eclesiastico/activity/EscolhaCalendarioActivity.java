@@ -7,8 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.CalendarView;
 
 import com.speedway.mobile.eclesiastico.R;
+import com.speedway.mobile.eclesiastico.util.l.Utils;
 
-public class CalendarioActivity extends AppCompatActivity {
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+public class EscolhaCalendarioActivity extends AppCompatActivity {
 
     CalendarView calendario;
 
@@ -38,12 +43,22 @@ public class CalendarioActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year,
                                             int month, int dayOfMonth) {
-                Intent intent = new Intent(CalendarioActivity.this,
-                        SalvarDataActivity.class);
-                intent.putExtra("dataLongMiliseconds",
-                        (Long) calendarView.getDate());
-                startActivity(intent);
+                Date dataDiaSeguinte = new Date();
+                Date dataEscolhida = new Date(year-1900, month, dayOfMonth);
 
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTime(dataDiaSeguinte);
+                gc.set(Calendar.DATE, gc.get(Calendar.DATE) - 1);
+                dataDiaSeguinte = gc.getTime();
+
+                if(dataDiaSeguinte.after(dataEscolhida)){
+                    Utils.alertaMensagem(EscolhaCalendarioActivity.this, "A data escolhida não pode ser anterior a data atual.");
+                }else {
+                    EventoActivity.date = dataEscolhida;
+                    Intent intent = new Intent(EscolhaCalendarioActivity.this,
+                            EventoActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 //        calendario = (CalendarView) findViewById (R.id.calendario);
@@ -51,7 +66,7 @@ public class CalendarioActivity extends AppCompatActivity {
 //        calendario.setOnClickListener (new CalendarView.OnDateChangeListener () {
 //            @Override
 //            public void onSelectedDayChange (@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-//                Intent intent = new Intent (getApplicationContext(), SalvarDataActivity.class);
+//                Intent intent = new Intent (getApplicationContext(), EventoActivity.class);
 //                startActivity(intent);
 //            }
 
@@ -61,7 +76,7 @@ public class CalendarioActivity extends AppCompatActivity {
 // {
 //            @Override
 //            public void onSelectedDayChange (View v) {
-//                Intent intent = new Intent (getApplicationContext(), SalvarDataActivity.class);
+//                Intent intent = new Intent (getApplicationContext(), EventoActivity.class);
 //                startActivity(intent);
 //
 //            }

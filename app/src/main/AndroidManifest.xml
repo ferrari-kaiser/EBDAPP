@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".activity.CalendarioActivity"
+            android:name=".activity.EscolhaCalendarioActivity"
             android:label="@string/title_activity_calendario"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
@@ -61,7 +61,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".activity.SalvarDataActivity"
+            android:name=".activity.EventoActivity"
             android:label="Salvar Data"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />

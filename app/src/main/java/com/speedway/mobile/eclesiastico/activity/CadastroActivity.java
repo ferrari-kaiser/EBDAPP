@@ -1,7 +1,6 @@
 package com.speedway.mobile.eclesiastico.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -65,19 +64,19 @@ public class CadastroActivity extends AppCompatActivity {
 //            if(bundle != null){
 //
 //
-//                    cadastro.setId (bundle.getLong ("id"));
-//                    cadastro.setNome (bundle.getString ("nome"));
-//                    cadastro.setEmail (bundle.getString ("email"));
-//                    cadastro.setTelefone (bundle.getInt ("telefone"));
-//                    cadastro.setSenha (bundle.getString ("senha"));
-////                    cadastro.setConfirmasenha (bundle.getString ("confirmasenha"));
+//                    cadastroMembro.setId (bundle.getLong ("id"));
+//                    cadastroMembro.setNome (bundle.getString ("nome"));
+//                    cadastroMembro.setEmail (bundle.getString ("email"));
+//                    cadastroMembro.setTelefone (bundle.getInt ("telefone"));
+//                    cadastroMembro.setSenha (bundle.getString ("senha"));
+////                    cadastroMembro.setConfirmasenha (bundle.getString ("confirmasenha"));
 //
 //
-//                    ednome.setText (cadastro.getNome ());
-//                    edemail.setText (cadastro.getEmail ());
-//                    edtelefone.setText ((int) cadastro.getTelefone ());
-//                    edsenha.setText (cadastro.getSenha ());
-////                    edconfirmasenha.setText (cadastro.getConfirmasenha ());
+//                    ednome.setText (cadastroMembro.getNome ());
+//                    edemail.setText (cadastroMembro.getEmail ());
+//                    edtelefone.setText ((int) cadastroMembro.getTelefone ());
+//                    edsenha.setText (cadastroMembro.getSenha ());
+////                    edconfirmasenha.setText (cadastroMembro.getConfirmasenha ());
 //
 //
 //                    edsenha.setVisibility (View.VISIBLE);
@@ -98,7 +97,7 @@ public class CadastroActivity extends AppCompatActivity {
         membro.setTelefone(edtelefone.getText().toString());
 
 
-        Call<BaseResponseRest> call = ConnectionEclesiasticoService.getService().cadastro(membro);
+        Call<BaseResponseRest> call = ConnectionEclesiasticoService.getService().cadastroMembro(membro);
 
         call.enqueue(new Callback<BaseResponseRest>() {
             @Override
@@ -128,7 +127,7 @@ public class CadastroActivity extends AppCompatActivity {
         cadastro.setEmail(edemail.getText().toString());
         cadastro.setTelefone(edtelefone.getInputType());
         cadastro.setSenha(edsenha.getText().toString());
-//        cadastro.setConfirmasenha (edconfirmasenha.getText().toString());
+//        cadastroMembro.setConfirmasenha (edconfirmasenha.getText().toString());
 
 
         DB db = new DB(this);

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DBUsuario extends SQLiteOpenHelper {
-    private static final String NOME_BD = "cadastro";
+    private static final String NOME_BD = "cadastroMembro";
     private static final int VERSAO_BD = 7;
 
 
@@ -20,7 +20,7 @@ public class DBUsuario extends SQLiteOpenHelper {
 
     @Override
     public void onCreate (SQLiteDatabase db) {
-        db.execSQL ("create table cadastro(_id integer primary key autoincrement," +
+        db.execSQL ("create table cadastroMembro(_id integer primary key autoincrement," +
                                             " nome text not null, " +
                                             "email text not null," +
                                             "telefone int not null," +
@@ -29,7 +29,7 @@ public class DBUsuario extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int arg1, int arg2) {
-        db.execSQL ("drop table cadastro;");
+        db.execSQL ("drop table cadastroMembro;");
         onCreate (db);
     }
 
