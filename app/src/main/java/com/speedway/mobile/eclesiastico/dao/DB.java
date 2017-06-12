@@ -1,4 +1,4 @@
-package com.speedway.mobile.eclesiastico.Banco;
+package com.speedway.mobile.eclesiastico.dao;
 
 import android.content.ContentValues;
 import android.content.Context;

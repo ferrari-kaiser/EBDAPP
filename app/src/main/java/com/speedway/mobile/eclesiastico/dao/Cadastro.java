@@ -1,4 +1,4 @@
-package com.speedway.mobile.eclesiastico.Banco;
+package com.speedway.mobile.eclesiastico.dao;
 
 /**
  * Created by ferrari on 03/06/2017.

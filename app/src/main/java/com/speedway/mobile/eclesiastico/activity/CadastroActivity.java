@@ -1,5 +1,6 @@
 package com.speedway.mobile.eclesiastico.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,17 +10,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.speedway.mobile.eclesiastico.Banco.Cadastro;
-import com.speedway.mobile.eclesiastico.Banco.DB;
-import com.speedway.mobile.eclesiastico.controller.CadastroController;
 import com.speedway.mobile.eclesiastico.R;
+import com.speedway.mobile.eclesiastico.controller.CadastroController;
+import com.speedway.mobile.eclesiastico.dao.Cadastro;
+import com.speedway.mobile.eclesiastico.dao.DB;
+import com.speedway.mobile.eclesiastico.model.BaseResponseRest;
+import com.speedway.mobile.eclesiastico.model.Membro;
+import com.speedway.mobile.eclesiastico.rest.ConnectionEclesiasticoService;
+import com.speedway.mobile.eclesiastico.util.l.Utils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity {
 
     CadastroController mController = new CadastroController(this);
 
     private Cadastro cadastro = new Cadastro();
-    private android.widget.Button btnCadastre;
+    private android.widget.Button btnCadastro;
     private android.widget.EditText ednome;
     private android.widget.EditText edtelefone;
     private android.widget.EditText edsenha;
@@ -27,69 +36,99 @@ public class CadastroActivity extends AppCompatActivity {
     private android.widget.EditText edemail;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_cadastro);
-        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
-        setSupportActionBar (toolbar);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastro);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 //
         initView();
 
-        mController.initDataComponent();
+//        mController.initDataComponent();
 
-        btnCadastre.setOnClickListener(new View.OnClickListener() {
+        btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mController.isValidateActivity();
 
-                if(mController.isValidateActivity()){
-                    salvarUsuario ();
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity (intent);
-                }else {
-                    Toast.makeText(getApplicationContext(),"Deu Errado",Toast.LENGTH_LONG).show();
+                if (mController.isValidateActivity()) {
+//                    cadastrarUsuarioBD();
+                    enviarCadastro();
                 }
             }
         });
 
 
-        Intent intent = getIntent();
-        if(intent != null){
-            Bundle bundle = intent.getExtras();
-            if(bundle != null){
-
-
-                    cadastro.setId (bundle.getLong ("id"));
-                    cadastro.setNome (bundle.getString ("nome"));
-                    cadastro.setEmail (bundle.getString ("email"));
-                    cadastro.setTelefone (bundle.getInt ("telefone"));
-                    cadastro.setSenha (bundle.getString ("senha"));
-//                    cadastro.setConfirmasenha (bundle.getString ("confirmasenha"));
-
-
-                    ednome.setText (cadastro.getNome ());
-                    edemail.setText (cadastro.getEmail ());
-                    edtelefone.setText ((int) cadastro.getTelefone ());
-                    edsenha.setText (cadastro.getSenha ());
-//                    edconfirmasenha.setText (cadastro.getConfirmasenha ());
-
-
-                    edsenha.setVisibility (View.VISIBLE);
-                    edconfirmasenha.setVisibility (View.VISIBLE);
-                    btnCadastre.setVisibility (View.VISIBLE);
-
-            }
-        }
+//        Intent intent = getIntent();
+//        if(intent != null){
+//            Bundle bundle = intent.getExtras();
+//            if(bundle != null){
+//
+//
+//                    cadastro.setId (bundle.getLong ("id"));
+//                    cadastro.setNome (bundle.getString ("nome"));
+//                    cadastro.setEmail (bundle.getString ("email"));
+//                    cadastro.setTelefone (bundle.getInt ("telefone"));
+//                    cadastro.setSenha (bundle.getString ("senha"));
+////                    cadastro.setConfirmasenha (bundle.getString ("confirmasenha"));
+//
+//
+//                    ednome.setText (cadastro.getNome ());
+//                    edemail.setText (cadastro.getEmail ());
+//                    edtelefone.setText ((int) cadastro.getTelefone ());
+//                    edsenha.setText (cadastro.getSenha ());
+////                    edconfirmasenha.setText (cadastro.getConfirmasenha ());
+//
+//
+//                    edsenha.setVisibility (View.VISIBLE);
+//                    edconfirmasenha.setVisibility (View.VISIBLE);
+//                    btnCadastro.setVisibility (View.VISIBLE);
+//
+//            }
+//        }
     }
 
-    private void salvarUsuario () {
+
+    public void enviarCadastro(){
+
+        Membro membro  = new Membro();
+        membro.setNome(ednome.getText().toString());
+        membro.setEmail(edemail.getText().toString());
+        membro.setSenha(edsenha.getText().toString());
+        membro.setTelefone(edtelefone.getText().toString());
+
+
+        Call<BaseResponseRest> call = ConnectionEclesiasticoService.getService().cadastro(membro);
+
+        call.enqueue(new Callback<BaseResponseRest>() {
+            @Override
+            public void onResponse(Call<BaseResponseRest> call, Response<BaseResponseRest> response) {
+                try {
+                    Utils.alertaMensagem(CadastroActivity.this, response.body().getMensagem(), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            CadastroActivity.this.finish();
+                        }
+                    });
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<BaseResponseRest> call, Throwable t) {
+                Utils.alertaMensagem(CadastroActivity.this, t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void cadastrarUsuarioBD() {
         cadastro.setNome(ednome.getText().toString());
         cadastro.setEmail(edemail.getText().toString());
-        cadastro.setTelefone (edtelefone.getInputType ());
-        cadastro.setSenha (edsenha.getText().toString());
+        cadastro.setTelefone(edtelefone.getInputType());
+        cadastro.setSenha(edsenha.getText().toString());
 //        cadastro.setConfirmasenha (edconfirmasenha.getText().toString());
-
 
 
         DB db = new DB(this);
@@ -99,26 +138,23 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
 
-
-
-    public void editarUsuario(View view){
+    public void editarUsuarioBD(View view) {
         cadastro.setNome(ednome.getText().toString());
         cadastro.setEmail(edemail.getText().toString());
-        cadastro.setTelefone (edtelefone.getInputType ());
-        cadastro.setSenha (edsenha.getText().toString());
+        cadastro.setTelefone(edtelefone.getInputType());
+        cadastro.setSenha(edsenha.getText().toString());
 
         DB db = new DB(this);
         db.atualizar(cadastro);
 
-        Toast.makeText(this, "Usuário \""+cadastro.getNome()+"\" atuailizado com sucesso.", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "Usuário \"" + cadastro.getNome() + "\" atuailizado com sucesso.", Toast.LENGTH_SHORT).show();
 
 
     }
 
     private void initView() {
 
-        this.btnCadastre = (Button) findViewById(R.id.btn_entrar);
+        this.btnCadastro = (Button) findViewById(R.id.btn_entrar);
         this.edtelefone = (EditText) findViewById(R.id.ed_telefone_celular);
         this.edemail = (EditText) findViewById(R.id.ed_email);
         this.edsenha = (EditText) findViewById(R.id.ed_senha);

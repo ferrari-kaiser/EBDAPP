@@ -118,7 +118,6 @@ public class FeedActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_perfil) {
 
-
             Intent intent = new Intent(getApplicationContext(), PerfilActivity.class);
             startActivity(intent);
 
