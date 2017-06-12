@@ -152,15 +152,20 @@
 
 
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="8dp"
-            android:src="@color/contentDividerLineGray" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Lista de eventos para esta data"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <ListView
             android:id="@+id/lista_eventos"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

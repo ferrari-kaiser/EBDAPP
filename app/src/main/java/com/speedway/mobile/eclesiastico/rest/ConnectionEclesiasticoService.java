@@ -18,7 +18,7 @@ public class ConnectionEclesiasticoService {
 
     private static EclesiasticoMobileService service;
 
-    private static String HOST_CONNECTION_SERVICE_REST = "http://192.168.0.104:8080";
+    private static String HOST_CONNECTION_SERVICE_REST = "http://192.168.0.105:8080";
 
     public static EclesiasticoMobileService getService() {
         if (service != null) {

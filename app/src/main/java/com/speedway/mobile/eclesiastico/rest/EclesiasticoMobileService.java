@@ -7,6 +7,8 @@ import com.speedway.mobile.eclesiastico.model.Evento;
 import com.speedway.mobile.eclesiastico.model.ImagemPerfilResponse;
 import com.speedway.mobile.eclesiastico.model.Membro;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -35,7 +37,7 @@ public interface EclesiasticoMobileService {
     Call<BaseResponseRest> cadastroEvento(@Body Evento evento);
 
 
-    @POST("/evento/listarEventosDoDia")
-    Call<BaseResponseRest> listarEventosDoDia(@Header(("dataPesquisa")) long dataPesquisa);
+    @GET("evento/listarEventosDoDia")
+    Call<List<Evento>> listarEventosDoDia(@Query("dataPesquisa") Long dataPesquisa);
 
 }

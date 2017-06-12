@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +27,9 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,6 +87,7 @@ public class EventoActivity extends AppCompatActivity {
                         public void onResponse(Call<BaseResponseRest> call, Response<BaseResponseRest> response) {
                             if (response != null && response.body() != null) {
                                 Utils.alertaMensagem(EventoActivity.this, response.body().getMensagem());
+                                listarEventos();
                             }
                         }
 
@@ -112,6 +116,46 @@ public class EventoActivity extends AppCompatActivity {
 
         TextView txtDataEvento = (TextView) findViewById(R.id.txt_data_evento);
         txtDataEvento.setText(sdf.format(date));
+
+        listarEventos();
+
+    }
+
+    private void listarEventos(){
+        Call<List<Evento>> call = ConnectionEclesiasticoService.getService().listarEventosDoDia(date.getTime());
+
+        call.enqueue(new Callback<List<Evento>>() {
+            @Override
+            public void onResponse(Call<List<Evento>> call, Response<List<Evento>> response) {
+                if(response!=null && response.body()!=null){
+
+                    String[] arrResult = new String[response.body().size()];
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+                    int i=0;
+                    for(Evento ev: response.body()){
+                        arrResult[i++] = ev.getDescricaoEvento()
+                                                + " de "
+                                                + sdf.format(ev.getDataInicio())
+                                                + " até " + sdf.format(ev.getDataFim());
+                    }
+
+                    ArrayAdapter<String> adapter =
+                                new ArrayAdapter<>(getBaseContext(),
+                                                            android.R.layout.activity_list_item,
+                                                            android.R.id.text1,
+                                                            arrResult);
+                    listaEventos.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Evento>> call, Throwable t) {
+                Utils.alertaMensagem(EventoActivity.this, t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 
 
