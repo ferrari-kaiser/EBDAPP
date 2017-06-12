@@ -12,12 +12,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- * Created by yesus on 09/06/17.
+ * Created by ferrari on 09/06/17.
  */
 
 public interface EclesiasticoMobileService {

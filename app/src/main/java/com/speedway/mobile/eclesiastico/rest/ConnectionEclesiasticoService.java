@@ -11,14 +11,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by yesus on 09/06/17.
+ * Created by ferrari on 09/06/17.
  */
 
 public class ConnectionEclesiasticoService {
 
     private static EclesiasticoMobileService service;
 
-    private static String HOST_CONNECTION_SERVICE_REST = "http://192.168.0.105:8080";
+    private static String HOST_CONNECTION_SERVICE_REST = "http://192.168.0.102:8080";
 
     public static EclesiasticoMobileService getService() {
         if (service != null) {
