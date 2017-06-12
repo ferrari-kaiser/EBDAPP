@@ -2,11 +2,21 @@ package com.speedway.mobile.eclesiastico.model;
 
 public class Evento {
 
+    private Long id;
+
     private String descricaoEvento;
     private String fotoBase64;
     private long dataInicio;
     private long dataFim;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescricaoEvento() {
         return descricaoEvento;

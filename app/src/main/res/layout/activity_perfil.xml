@@ -50,7 +50,6 @@
                     android:inputType="textPersonName"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:enabled="false"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="0dp" />
             </android.support.design.widget.TextInputLayout>
@@ -91,7 +90,6 @@
                     android:inputType="textEmailAddress"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:enabled="false"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="0dp" />
 
@@ -114,22 +112,20 @@
                     android:inputType="number"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:enabled="false"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="0dp" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_entrar"
+                android:id="@+id/btn_atualizar_dados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_button"
-                android:text="Salvar"
+                android:text="Atualizar dados"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold"/>
         </LinearLayout>
 
     </ScrollView>

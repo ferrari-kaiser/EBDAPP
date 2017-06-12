@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.speedway.mobile.eclesiastico.R;
+import com.speedway.mobile.eclesiastico.controller.CadastroController;
+import com.speedway.mobile.eclesiastico.model.Membro;
 import com.speedway.mobile.eclesiastico.util.Identity;
 
 import java.util.Date;
@@ -26,7 +30,7 @@ public class PerfilActivity extends AppCompatActivity {
     private android.widget.EditText eddatanascimento;
     private android.widget.EditText edemail;
     private CircleImageView perfilImagem;
-
+    private Button btnAtualizarDados;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -40,10 +44,22 @@ public class PerfilActivity extends AppCompatActivity {
         this.eddatanascimento = (EditText) findViewById(R.id.ed_data_nascimento);
         this.ednome = (EditText) findViewById(R.id.ed_nome);
         this.perfilImagem = (CircleImageView) findViewById(R.id.imagem_perfil);
+        this.btnAtualizarDados = (Button)findViewById(R.id.btn_atualizar_dados);
 
         edtelefonecelular.setText(Identity.membroLogado.getTelefone());
         edemail.setText(Identity.membroLogado.getEmail());
         ednome.setText(Identity.membroLogado.getNome());
+
+        btnAtualizarDados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Identity.membroLogado.setNome(ednome.getText().toString());
+                Identity.membroLogado.setEmail(edemail.getText().toString());
+                Identity.membroLogado.setTelefone(edtelefonecelular.getText().toString());
+
+                new CadastroController(null).enviarCadastro(Identity.membroLogado,PerfilActivity.this);
+            }
+        });
 
         if (Identity.membroLogado.getDataNascimento() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

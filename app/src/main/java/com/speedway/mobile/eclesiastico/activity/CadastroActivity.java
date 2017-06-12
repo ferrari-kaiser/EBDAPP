@@ -96,30 +96,7 @@ public class CadastroActivity extends AppCompatActivity {
         membro.setSenha(edsenha.getText().toString());
         membro.setTelefone(edtelefone.getText().toString());
 
-
-        Call<BaseResponseRest> call = ConnectionEclesiasticoService.getService().cadastroMembro(membro);
-
-        call.enqueue(new Callback<BaseResponseRest>() {
-            @Override
-            public void onResponse(Call<BaseResponseRest> call, Response<BaseResponseRest> response) {
-                try {
-                    Utils.alertaMensagem(CadastroActivity.this, response.body().getMensagem(), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            CadastroActivity.this.finish();
-                        }
-                    });
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(Call<BaseResponseRest> call, Throwable t) {
-                Utils.alertaMensagem(CadastroActivity.this, t.getMessage());
-                t.printStackTrace();
-            }
-        });
+        new CadastroController(this).enviarCadastro(membro,this);
     }
 
     private void cadastrarUsuarioBD() {

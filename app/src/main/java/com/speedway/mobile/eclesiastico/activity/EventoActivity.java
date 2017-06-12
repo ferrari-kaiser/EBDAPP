@@ -8,7 +8,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +31,10 @@ import com.speedway.mobile.eclesiastico.util.l.Utils;
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,8 +49,11 @@ public class EventoActivity extends AppCompatActivity {
     private AlertDialog alerta;
     public static final int IMAGEM_INTERNA = 12;
     public static Date date = new Date();
-    private ListView listaEventos;
+    private ListView listViewEventos;
     private LinearLayout linearLayoutEvento;
+    private ArrayAdapter<String> adapterListaEventos;
+    private ArrayList<String> listaEventosString;
+    private List<Evento> listaEventosObj;
 
     private String fotoBase64 = "";
 
@@ -64,10 +70,10 @@ public class EventoActivity extends AppCompatActivity {
         btnBanner = (Button) findViewById(R.id.btn_banner);
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         txt_descricao = (EditText) findViewById(R.id.txt_descricao);
-        listaEventos = (ListView) findViewById(R.id.lista_eventos);
+        listViewEventos = (ListView) findViewById(R.id.lista_eventos);
         linearLayoutEvento = (LinearLayout) findViewById(R.id.linearLayoutEvento);
 
-        if(!Identity.membroLogado.isLideranca()){
+        if (!Identity.membroLogado.isLideranca()) {
             linearLayoutEvento.setVisibility(View.GONE);
             setTitle("Evento");
         }
@@ -130,32 +136,36 @@ public class EventoActivity extends AppCompatActivity {
 
     }
 
-    private void listarEventos(){
+    private void listarEventos() {
         Call<List<Evento>> call = ConnectionEclesiasticoService.getService().listarEventosDoDia(date.getTime());
 
         call.enqueue(new Callback<List<Evento>>() {
             @Override
             public void onResponse(Call<List<Evento>> call, Response<List<Evento>> response) {
-                if(response!=null && response.body()!=null){
+                if (response != null && response.body() != null) {
 
-                    String[] arrResult = new String[response.body().size()];
+                    listaEventosObj = response.body();
+                    listaEventosString = new ArrayList<String>();
 
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-                    int i=0;
-                    for(Evento ev: response.body()){
-                        arrResult[i++] = ev.getDescricaoEvento()
-                                                + " de "
-                                                + sdf.format(ev.getDataInicio())
-                                                + " até " + sdf.format(ev.getDataFim());
+                    for (Evento ev : response.body()) {
+                        listaEventosString.add(ev.getDescricaoEvento()
+                                + " de "
+                                + sdf.format(ev.getDataInicio())
+                                + " até " + sdf.format(ev.getDataFim()));
                     }
 
-                    ArrayAdapter<String> adapter =
-                                new ArrayAdapter<>(getBaseContext(),
-                                                            android.R.layout.activity_list_item,
-                                                            android.R.id.text1,
-                                                            arrResult);
-                    listaEventos.setAdapter(adapter);
+                    adapterListaEventos =
+                            new ArrayAdapter<>(getBaseContext(),
+                                    android.R.layout.activity_list_item,
+                                    android.R.id.text1,
+                                    listaEventosString);
+                    listViewEventos.setAdapter(adapterListaEventos);
+
+                    if (Identity.membroLogado.isLideranca()) {
+                        registerForContextMenu(listViewEventos);
+                    }
                 }
             }
 
@@ -167,6 +177,46 @@ public class EventoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case 0:
+
+                Evento evento = listaEventosObj.get(info.position);
+
+                Call<BaseResponseRest> call = ConnectionEclesiasticoService.getService().removerEvento(evento);
+
+                call.enqueue(new Callback<BaseResponseRest>() {
+                    @Override
+                    public void onResponse(Call<BaseResponseRest> call, Response<BaseResponseRest> response) {
+                        if(response!=null && response.body()!=null){
+                            listaEventosString.remove(info.position);
+                            listaEventosObj.remove(info.position);
+                            adapterListaEventos.notifyDataSetChanged();
+
+                            Utils.alertaMensagem(EventoActivity.this, response.body().getMensagem());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<BaseResponseRest> call, Throwable t) {
+                        t.printStackTrace();
+                        Utils.alertaMensagem(EventoActivity.this, t.getMessage());
+                    }
+                });
+
+
+        }
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.lista_eventos) {
+            menu.add("Excluir");
+        }
+    }
 
     private void alertaImagem() {
         //Cria o gerador do AlertDialog
