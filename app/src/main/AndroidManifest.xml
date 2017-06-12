@@ -62,7 +62,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.EventoActivity"
-            android:label="Salvar Data"
+            android:label="Criar Evento"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity

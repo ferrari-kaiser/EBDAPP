@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.speedway.mobile.eclesiastico.R;
 import com.speedway.mobile.eclesiastico.model.BaseResponseRest;
 import com.speedway.mobile.eclesiastico.model.Evento;
 import com.speedway.mobile.eclesiastico.rest.ConnectionEclesiasticoService;
+import com.speedway.mobile.eclesiastico.util.Identity;
 import com.speedway.mobile.eclesiastico.util.l.Utils;
 
 import java.io.ByteArrayOutputStream;
@@ -45,6 +47,7 @@ public class EventoActivity extends AppCompatActivity {
     public static final int IMAGEM_INTERNA = 12;
     public static Date date = new Date();
     private ListView listaEventos;
+    private LinearLayout linearLayoutEvento;
 
     private String fotoBase64 = "";
 
@@ -62,6 +65,12 @@ public class EventoActivity extends AppCompatActivity {
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         txt_descricao = (EditText) findViewById(R.id.txt_descricao);
         listaEventos = (ListView) findViewById(R.id.lista_eventos);
+        linearLayoutEvento = (LinearLayout) findViewById(R.id.linearLayoutEvento);
+
+        if(!Identity.membroLogado.isLideranca()){
+            linearLayoutEvento.setVisibility(View.GONE);
+            setTitle("Evento");
+        }
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override

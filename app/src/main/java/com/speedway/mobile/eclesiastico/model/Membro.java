@@ -21,6 +21,9 @@ public class Membro {
 
     private String telefone;
 
+
+    private boolean lideranca;
+
     public Long getId() {
         return id;
     }
@@ -75,5 +78,13 @@ public class Membro {
 
     public void setFotoBase64(String fotoBase64) {
         this.fotoBase64 = fotoBase64;
+    }
+
+    public boolean isLideranca() {
+        return lideranca;
+    }
+
+    public void setLideranca(boolean lideranca) {
+        this.lideranca = lideranca;
     }
 }
