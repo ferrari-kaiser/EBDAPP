@@ -14,7 +14,6 @@ import android.widget.EditText;
 
 import com.speedway.mobile.eclesiastico.R;
 import com.speedway.mobile.eclesiastico.controller.CadastroController;
-import com.speedway.mobile.eclesiastico.model.Membro;
 import com.speedway.mobile.eclesiastico.util.Identity;
 
 import java.util.Date;
@@ -29,6 +28,7 @@ public class PerfilActivity extends AppCompatActivity {
     private android.widget.EditText edtelefonecelular;
     private android.widget.EditText eddatanascimento;
     private android.widget.EditText edemail;
+    private android.widget.EditText edsenha;
     private CircleImageView perfilImagem;
     private Button btnAtualizarDados;
 
@@ -43,12 +43,14 @@ public class PerfilActivity extends AppCompatActivity {
         this.edemail = (EditText) findViewById(R.id.ed_email);
         this.eddatanascimento = (EditText) findViewById(R.id.ed_data_nascimento);
         this.ednome = (EditText) findViewById(R.id.ed_nome);
+        this.edsenha = (EditText) findViewById (R.id.ed_senha);
         this.perfilImagem = (CircleImageView) findViewById(R.id.imagem_perfil);
         this.btnAtualizarDados = (Button)findViewById(R.id.btn_atualizar_dados);
 
         edtelefonecelular.setText(Identity.membroLogado.getTelefone());
         edemail.setText(Identity.membroLogado.getEmail());
         ednome.setText(Identity.membroLogado.getNome());
+        edsenha.setText(Identity.membroLogado.getSenha ());
 
         btnAtualizarDados.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,7 @@ public class PerfilActivity extends AppCompatActivity {
                 Identity.membroLogado.setNome(ednome.getText().toString());
                 Identity.membroLogado.setEmail(edemail.getText().toString());
                 Identity.membroLogado.setTelefone(edtelefonecelular.getText().toString());
+                Identity.membroLogado.setSenha(edsenha.getText().toString());
 
                 new CadastroController(null).enviarCadastro(Identity.membroLogado,PerfilActivity.this);
             }

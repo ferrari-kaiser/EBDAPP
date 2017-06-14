@@ -150,7 +150,7 @@ public class FeedActivity extends AppCompatActivity
 //            }
 //            super.onResume();
 //        }
-
+ 
 
 
 
@@ -169,6 +169,8 @@ public class FeedActivity extends AppCompatActivity
 //                getParent().finish();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     finishAffinity();
+                    Intent intent = new Intent (getApplicationContext (), LoginActivity.class);
+                    startActivity (intent);
 
                 }
             }
