@@ -160,7 +160,7 @@ public class FeedActivity extends AppCompatActivity
         //Cria o gerador do AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //define o titulo
-        builder.setTitle("EBD APP");
+        builder.setTitle("APP da Assembléia");
         //define a mensagem
         builder.setMessage("Tem certeza que deseja sair?");
         //define um botão como positivo
